@@ -1,6 +1,9 @@
 import csv
 from datetime import datetime
 
+# Caminho do arquivo CSV de entrada
+caminho_arquivo_csv = r"C:\pythonjr\InterrupcoesANEEL\exemplo_base_de_dados.csv"
+
 def contar_linhas_colunas(csv_file):
     """Conta o número de linhas e colunas no arquivo CSV."""
     with open(csv_file, 'r', encoding='latin-1') as f:
@@ -36,9 +39,6 @@ def processar_arquivo_csv(csv_file, novo_csv_file):
                 diferenca = diferenca_de_tempo(tempo1, tempo2)
                 # Escrever a diferença de tempo formatada com duas casas decimais no novo arquivo CSV
                 escritor_csv.writerow(["{:.2f}".format(diferenca)])
-
-# Caminho do arquivo CSV de entrada
-caminho_arquivo_csv = r"C:\pythonjr\InterrupcoesANEEL\interrupcoes-energia-eletrica-2024.csv"
 
 # Obter a quantidade de linhas e colunas do arquivo CSV de entrada
 linhas, colunas = contar_linhas_colunas(caminho_arquivo_csv)

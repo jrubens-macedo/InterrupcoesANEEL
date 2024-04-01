@@ -3,7 +3,7 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 
 # Caminho do arquivo CSV de entrada
-caminho_arquivo_csv = r"C:\pythonjr\interrupcoes_ANEEL\interrupcoes-energia-eletrica-2024.csv"
+caminho_arquivo_csv = r"C:\pythonjr\interrupcoes_ANEEL\exemplo_base_de_dados.csv"
 def contar_linhas_colunas(csv_file):
     """Conta o número de linhas e colunas no arquivo CSV."""
     with open(csv_file, 'r', encoding='latin-1') as f:

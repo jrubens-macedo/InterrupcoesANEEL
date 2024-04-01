@@ -1,9 +1,9 @@
 import csv
 from datetime import datetime
+import matplotlib.pyplot as plt
 
 # Caminho do arquivo CSV de entrada
-caminho_arquivo_csv = r"C:\pythonjr\InterrupcoesANEEL\exemplo_base_de_dados.csv"
-
+caminho_arquivo_csv = r"C:\pythonjr\interrupcoes_ANEEL\interrupcoes-energia-eletrica-2024.csv"
 def contar_linhas_colunas(csv_file):
     """Conta o número de linhas e colunas no arquivo CSV."""
     with open(csv_file, 'r', encoding='latin-1') as f:
@@ -48,11 +48,36 @@ print(f"  Quantidade de colunas = {colunas}")
 print("--------------------------------------------")
 
 # Caminho do novo arquivo CSV de saída
-novo_csv_file = r"C:\pythonjr\InterrupcoesANEEL\diferenca_tempos.csv"
+novo_csv_file = r"C:\pythonjr\interrupcoes_ANEEL\diferenca_tempos.csv"
 
 # Processar o arquivo CSV de entrada e criar o novo arquivo CSV com as diferenças de tempo
 processar_arquivo_csv(caminho_arquivo_csv, novo_csv_file)
 
 print("Arquivo CSV criado com sucesso!")
+
+# Leitura do arquivo CSV com as diferenças de tempo
+with open(novo_csv_file, 'r', encoding='utf-8') as f:
+    leitor_csv = csv.reader(f)
+    # Extrair os dados de diferenças de tempo
+    diferencas_tempo = [float(row[0]) for row in leitor_csv]
+
+# Calcular a diferença máxima e mínima de tempo
+min_tempo = min(diferencas_tempo)
+max_tempo = max(diferencas_tempo)
+
+# Calcular o número de bins necessário para garantir que cada bin tenha 10 minutos
+num_bins = int((max_tempo - min_tempo) / 10)
+
+# Criar o histograma com bins de 10 minutos
+plt.figure(figsize=(25, 6))
+plt.hist(diferencas_tempo, bins=num_bins, range=(min_tempo, max_tempo), color='blue', edgecolor='white')
+plt.xlabel('Duração (minutos)', fontsize=14)
+plt.ylabel('Frequência de Ocorrências', fontsize=14)
+plt.grid(True, linestyle='--')
+plt.xticks(fontsize=12)
+plt.yticks(fontsize=12)
+plt.xlim(0, 4000)
+plt.show()
+
 
 
